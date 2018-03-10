@@ -1,11 +1,12 @@
 package lab;
 
-import javax.media.j3d.BranchGroup;
 import java.util.Arrays;
 import java.util.Scanner;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
+import static lab.VectorUtils.diff;
+import static lab.VectorUtils.scalar;
 
 /**
  * Created by Ilya on 2/15/2018.
@@ -67,47 +68,4 @@ public class Sphere {
         return sqrt(scalar(a, E) * scalar(a, E) - scalar(a, a) + R * R);
     }
 
-    private static double[] diff(double[] a, double[] b) {
-        double[] c = new double[a.length];
-        for (int i = 0; i < a.length; i++) {
-            c[i] = a[i] - b[i];
-        }
-        return c;
-    }
-
-    private static double sum(double[] a) {
-        double res = 0;
-        for (double anA : a) {
-            res += anA;
-        }
-        return res;
-    }
-
-    private static double[] sum(double[] a, double[] b) {
-        double[] c = new double[a.length];
-        for (int i = 0; i < a.length; i++) {
-            c[i] = a[i] + b[i];
-        }
-        return c;
-    }
-
-    private static double[] multiply(double[] a, double[] b) {
-        double[] c = new double[a.length];
-        for (int i = 0; i < a.length; i++) {
-            c[i] = a[i] * b[i];
-        }
-        return c;
-    }
-
-    private static double scalar(double[] a, double[] b) {
-        return sum(multiply(a, b));
-    }
-
-    private static double[] multiply(double[] a, double b) {
-        double[] c = new double[a.length];
-        for (int i = 0; i < a.length; i++) {
-            c[i] = a[i] * b;
-        }
-        return c;
-    }
 }

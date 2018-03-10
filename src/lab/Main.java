@@ -10,40 +10,25 @@ import static java.lang.Math.sqrt;
  * Created by Ilya on 2/15/2018.
  */
 public class Main {
+    static double x0;
+    static double y0;
+    static double z0;
+    static double ex;
+    static double ey;
+    static double ez;
+    static double rpx0;
+    static double rpy0;
+    static double rpz0;
+    static double nx;
+    static double ny;
+    static double nz;
+    static double[] R0;//ray
+    static double[] E;//rayDirection
+    static double[] RP0;//plane
+    static double[] N;//normal
+
     public static void main(String[] args) {
-        System.out.println("Параметры луча:");
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Координата начала луча по x:");
-        double x0 = scanner.nextDouble();
-        System.out.println("Координата начала луча по y:");
-        double y0 = scanner.nextDouble();
-        System.out.println("Координата начала луча по z:");
-        double z0 = scanner.nextDouble();
-        System.out.println("Координата направления луча по x:");
-        double ex = scanner.nextDouble();
-        System.out.println("Координата направления луча по y:");
-        double ey = scanner.nextDouble();
-        System.out.println("Координата направления луча по z:");
-        double ez = scanner.nextDouble();
-        System.out.println("Параметры плоскости:");
-        System.out.println("Координата точки плоскости по x:");
-        double rpx0 = scanner.nextDouble();
-        System.out.println("Координата точки плоскости по y:");
-        double rpy0 = scanner.nextDouble();
-        System.out.println("Координата точки плоскости по z:");
-        double rpz0 = scanner.nextDouble();
-        System.out.println("Координата нормали по x:");
-        double nx = scanner.nextDouble();
-        System.out.println("Координата нормали по y:");
-        double ny = scanner.nextDouble();
-        System.out.println("Координата нормали по z:");
-        double nz = scanner.nextDouble();
-        double absN = sqrt(nx*nx+ny*ny+nz*nz);
-        double absE = sqrt(ex*ex+ey*ey+ez*ez);
-        double[] R0 = {x0, y0, z0};//ray
-        double[] E = {ex/absE, ey/absE, ez/absE};//rayDirection
-        double[] RP0 = {rpx0, rpy0, rpz0};//plane
-        double[] N = {nx/absN, ny/absN, nz/absN};//normal
+        initFromInput();
         //sum((RP0- R0)*normal)==0 && sum(E. * N))
         if (sum(multiply(diff(RP0, R0), N)) == 0 && (sum(multiply(E, N))) == 0) {//луч совпадает с плоскостью
             System.out.println("Луч лежит на плоскости");
@@ -57,7 +42,6 @@ public class Main {
             double[] R = sum(R0,multiply(E,t));
             System.out.println("Координаты точки пересечения луча с плоскостью:"+ Arrays.toString(R));
         }
-
     }
 
     private static double[] diff(double[] a, double[] b) {
@@ -109,4 +93,39 @@ public class Main {
         disp('Координаты точки пересечения луча с плоскостью:');
         R
                 end*/
+    static private void initFromInput(){
+        System.out.println("Параметры луча:");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Координата начала луча по x:");
+        x0 = scanner.nextDouble();
+        System.out.println("Координата начала луча по y:");
+        y0 = scanner.nextDouble();
+        System.out.println("Координата начала луча по z:");
+        z0 = scanner.nextDouble();
+        System.out.println("Координата направления луча по x:");
+        ex = scanner.nextDouble();
+        System.out.println("Координата направления луча по y:");
+        ey = scanner.nextDouble();
+        System.out.println("Координата направления луча по z:");
+        ez = scanner.nextDouble();
+        System.out.println("Параметры плоскости:");
+        System.out.println("Координата точки плоскости по x:");
+        rpx0 = scanner.nextDouble();
+        System.out.println("Координата точки плоскости по y:");
+        rpy0 = scanner.nextDouble();
+        System.out.println("Координата точки плоскости по z:");
+        rpz0 = scanner.nextDouble();
+        System.out.println("Координата нормали по x:");
+        nx = scanner.nextDouble();
+        System.out.println("Координата нормали по y:");
+        ny = scanner.nextDouble();
+        System.out.println("Координата нормали по z:");
+        nz = scanner.nextDouble();
+        double absN = sqrt(nx*nx+ny*ny+nz*nz);
+        double absE = sqrt(ex*ex+ey*ey+ez*ez);
+        R0 = new double[]{x0, y0, z0};
+        E = new double[]{ex/absE, ey/absE, ez/absE};
+        RP0 = new double[]{rpx0, rpy0, rpz0};
+        N = new double[]{nx/absN, ny/absN, nz/absN};
+    }
 }
